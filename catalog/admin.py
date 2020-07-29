@@ -12,9 +12,14 @@ class AuthorAdmin(admin.ModelAdmin):
     fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death')]
 
 
+class BookInstanceInline(admin.TabularInline):
+    model = BookInstance
+
+
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'isbn', 'author', 'display_genre')
+    inlines = [BookInstanceInline]
 
 
 @admin.register(BookInstance)
@@ -30,3 +35,4 @@ class BookInstanceAdmin(admin.ModelAdmin):
             'fields': ('status', 'due_back')
         }),
     )
+
